@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Projeto_Eletrodomesticos
+    username: root
+    password: admin@123
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show_sql: true
+    hibernate:
+      ddl-auto: update

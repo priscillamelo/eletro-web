@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <title>Página Inicial - Administrador</title>
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar bg-dark">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">Administrador</a>
+            <!--Colocar o nome do administrador logado-->
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="#!">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                </ul>
+                <a th:href="@{'/cadastrar/'}" class="btn btn-light"><span><i
+                            class="bi bi-plus-square-fill me-1"></i></span>
+                    Cadastrar Produto Eletrodoméstico
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Header-->
+    <!-- <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Shop in style</h1>
+                <p class="lead fw-normal text-white-50 mb-0">With this shop homepage template</p>
+            </div>
+        </div>
+    </header> -->
+    <!-- Main -->
+    <main th:replace="/fragments-admin/commons/main :: main(${produtoEletro})"></main>
+    <!-- Footer -->
+    <footer th:replace="/fragments-admin/commons/footer :: footer"></footer>
+</body>
+
+</html>
