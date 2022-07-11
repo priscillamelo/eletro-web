@@ -1,7 +1,6 @@
 package com.tads.projeto_eletrodomesticos.controller;
 
 import com.tads.projeto_eletrodomesticos.domain.Eletrodomestico;
-import com.tads.projeto_eletrodomesticos.repository.EletrodomesticoRepository;
 import com.tads.projeto_eletrodomesticos.service.EletrodomesticoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,6 @@ public class UserController {
     }
 
     List<Eletrodomestico> carrinho = new ArrayList<>();
-
     @GetMapping({ "/", "/index" })
     public String getIndex(Model model, HttpServletResponse response) {
         Date dataVisita = new Date();
@@ -46,13 +44,12 @@ public class UserController {
 
     @GetMapping("adicionarCarrinho/{id}")
     public String addCarrinho(@PathVariable Long id, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
 
         Eletrodomestico produto = service.findById(id);
-        System.out.println(produto);
         carrinho.add(produto);
         session.setAttribute("carrinho", carrinho);
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("verCarrinho")
@@ -60,19 +57,20 @@ public class UserController {
         HttpSession carrinhoSession = request.getSession();
 
         List<Eletrodomestico> listaCarrinho = (List<Eletrodomestico>) carrinhoSession.getAttribute("carrinho");
+        System.out.println(listaCarrinho);
 
         if (listaCarrinho != null) {
             model.addAttribute("carrinho", listaCarrinho);
             return "carrinho";
         } else {
-            return "redirect:/index";
+            return "redirect:/";
         }
     }
 
-    @GetMapping("/finalizarCompra")
+    @GetMapping("finalizarCompra")
     public String finalizaCompra(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         session.invalidate();
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
